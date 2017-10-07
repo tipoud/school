@@ -6,6 +6,7 @@ import { Ng2Webstorage } from 'ng2-webstorage';
 
 import { GogradeSharedModule, UserRouteAccessService } from './shared';
 import { GogradeHomeModule } from './home/home.module';
+import { GogradeObservationModule } from './observation/observation.module';
 import { GogradeAdminModule } from './admin/admin.module';
 import { GogradeAccountModule } from './account/account.module';
 import { GogradeEntityModule } from './entities/entity.module';
@@ -24,6 +25,7 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
+import { ObservationComponent } from './observation/observation.component';
 
 @NgModule({
     imports: [
@@ -35,6 +37,7 @@ import {
         GogradeAdminModule,
         GogradeAccountModule,
         GogradeEntityModule,
+        GogradeObservationModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -42,7 +45,7 @@ import {
         NavbarComponent,
         ErrorComponent,
         PageRibbonComponent,
-        FooterComponent
+        FooterComponent,
     ],
     providers: [
         ProfileService,
