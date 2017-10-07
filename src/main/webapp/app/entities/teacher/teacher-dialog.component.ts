@@ -106,6 +106,11 @@ export class TeacherDialogComponent implements OnInit {
         }
         return option;
     }
+
+    userChanged() {
+        this.teacher.firstName = this.teacher.user.firstName
+        this.teacher.lastName = this.teacher.user.lastName
+    }
 }
 
 @Component({

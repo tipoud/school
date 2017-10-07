@@ -32,7 +32,7 @@ public class TeacherResource {
 
     private final Logger log = LoggerFactory.getLogger(TeacherResource.class);
 
-    private static final String ENTITY_NAME = "teacher";
+    private static final String ENTITY_NAME = "Enseignant";
 
     private final TeacherService teacherService;
 

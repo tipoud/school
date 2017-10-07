@@ -22,13 +22,13 @@
             <div *ngIf="loginInput.dirty && loginInput.invalid">
                 <small class="form-text text-danger"
                    *ngIf="loginInput.errors.required">
-                    This field is required.
+                    Ce champ est obligatoire.
                 </small>
 
                 <small class="form-text text-danger"
                    *ngIf="loginInput.errors.maxlength"
                   >
-                    This field cannot be longer than 50 characters.
+                    The champ ne peut pas dépasser 50 caractères.
                 </small>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <small class="form-text text-danger"
                    *ngIf="firstNameInput.errors.maxlength"
                   >
-                    This field cannot be longer than 50 characters.
+                    The champ ne peut pas dépasser 50 caractères.
                 </small>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <small class="form-text text-danger"
                    *ngIf="lastNameInput.errors.maxlength"
                   >
-                    This field cannot be longer than 50 characters.
+                    The champ ne peut pas dépasser 50 caractères.
                 </small>
             </div>
         </div>
@@ -66,19 +66,19 @@
             <div *ngIf="emailInput.dirty && emailInput.invalid">
                 <small class="form-text text-danger"
                    *ngIf="emailInput.errors.required">
-                    This field is required.
+                    Ce champ est obligatoire.
                 </small>
 
                 <small class="form-text text-danger"
                    *ngIf="emailInput.errors.maxlength"
                   >
-                    This field cannot be longer than 100 characters.
+                    Ce champ ne peut pas dépasser 100 caractères.
                 </small>
 
                 <small class="form-text text-danger"
                    *ngIf="emailInput.errors.minlength"
                   >
-                    This field is required to be at least 5 characters.
+                    The champ est obligatoire to be at least 5 characters.
                 </small>
 
                 <small class="form-text text-danger"

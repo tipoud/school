@@ -13,9 +13,22 @@
                    [(ngModel)]="teacher.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_lastName">Last Name</label>
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="teacher.user" (change)="userChanged()"  required>
+                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id === teacher.user?.id ? teacher.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.firstName}} {{userOption.lastName}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.user?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_lastName">Nom</label>
             <input type="text" class="form-control" name="lastName" id="field_lastName"
-                [(ngModel)]="teacher.lastName" required />
+                [(ngModel)]="teacher.lastName" required readonly/>
             <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.lastName?.errors?.required">
@@ -24,29 +37,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_firstName">First Name</label>
+            <label class="form-control-label" for="field_firstName">Prénom</label>
             <input type="text" class="form-control" name="firstName" id="field_firstName"
-                [(ngModel)]="teacher.firstName" required />
+                [(ngModel)]="teacher.firstName" required readonly/>
             <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.firstName?.errors?.required">
                    This field is required.
                 </small>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label class="form-control-label" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="teacher.user"  required>
-                <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
-                <option [ngValue]="userOption.id === teacher.user?.id ? teacher.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
-            </select>
-        </div>
-        <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
-            <small class="form-text text-danger"
-                [hidden]="!editForm.controls.user?.errors?.required">
-                This field is required.
-            </small>
         </div>
         <div class="form-group">
             <label for="field_classes">Classes</label>
