@@ -23,6 +23,10 @@ public class Mark implements Serializable {
     @Column(name = "jhi_value", nullable = false)
     private Integer value;
 
+    @NotNull
+    @Column(name = "nth", nullable = false)
+    private Integer nth;
+
     @ManyToOne(optional = false)
     @NotNull
     private Evaluation evaluation;
@@ -55,6 +59,19 @@ public class Mark implements Serializable {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public Integer getNth() {
+        return nth;
+    }
+
+    public Mark nth(Integer nth) {
+        this.nth = nth;
+        return this;
+    }
+
+    public void setNth(Integer nth) {
+        this.nth = nth;
     }
 
     public Evaluation getEvaluation() {
@@ -122,6 +139,7 @@ public class Mark implements Serializable {
         return "Mark{" +
             "id=" + getId() +
             ", value='" + getValue() + "'" +
+            ", nth='" + getNth() + "'" +
             "}";
     }
 }

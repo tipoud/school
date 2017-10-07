@@ -30,11 +30,19 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "nth",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20171007154713",
-    "entityTableName": "mark",
     "dto": "no",
-    "pagination": "no",
-    "service": "serviceClass"
+    "service": "serviceClass",
+    "entityTableName": "mark",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

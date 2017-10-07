@@ -26,6 +26,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="nth" type="integer">
+                <constraints nullable="false" />
+            </column>
+
             <column name="evaluation_id" type="bigint">
                 <constraints nullable="false" />
             </column>

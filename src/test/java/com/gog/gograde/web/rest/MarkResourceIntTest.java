@@ -44,6 +44,9 @@ public class MarkResourceIntTest {
     private static final Integer DEFAULT_VALUE = 1;
     private static final Integer UPDATED_VALUE = 2;
 
+    private static final Integer DEFAULT_NTH = 1;
+    private static final Integer UPDATED_NTH = 2;
+
     @Autowired
     private MarkRepository markRepository;
 
@@ -84,7 +87,8 @@ public class MarkResourceIntTest {
      */
     public static Mark createEntity(EntityManager em) {
         Mark mark = new Mark()
-            .value(DEFAULT_VALUE);
+            .value(DEFAULT_VALUE)
+            .nth(DEFAULT_NTH);
         // Add required entity
         Evaluation evaluation = EvaluationResourceIntTest.createEntity(em);
         em.persist(evaluation);
@@ -124,6 +128,7 @@ public class MarkResourceIntTest {
         assertThat(markList).hasSize(databaseSizeBeforeCreate + 1);
         Mark testMark = markList.get(markList.size() - 1);
         assertThat(testMark.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testMark.getNth()).isEqualTo(DEFAULT_NTH);
     }
 
     @Test
@@ -165,6 +170,24 @@ public class MarkResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNthIsRequired() throws Exception {
+        int databaseSizeBeforeTest = markRepository.findAll().size();
+        // set the field null
+        mark.setNth(null);
+
+        // Create the Mark, which fails.
+
+        restMarkMockMvc.perform(post("/api/marks")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(mark)))
+            .andExpect(status().isBadRequest());
+
+        List<Mark> markList = markRepository.findAll();
+        assertThat(markList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMarks() throws Exception {
         // Initialize the database
         markRepository.saveAndFlush(mark);
@@ -174,7 +197,8 @@ public class MarkResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(mark.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
+            .andExpect(jsonPath("$.[*].nth").value(hasItem(DEFAULT_NTH)));
     }
 
     @Test
@@ -188,7 +212,8 @@ public class MarkResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(mark.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE))
+            .andExpect(jsonPath("$.nth").value(DEFAULT_NTH));
     }
 
     @Test
@@ -210,7 +235,8 @@ public class MarkResourceIntTest {
         // Update the mark
         Mark updatedMark = markRepository.findOne(mark.getId());
         updatedMark
-            .value(UPDATED_VALUE);
+            .value(UPDATED_VALUE)
+            .nth(UPDATED_NTH);
 
         restMarkMockMvc.perform(put("/api/marks")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -222,6 +248,7 @@ public class MarkResourceIntTest {
         assertThat(markList).hasSize(databaseSizeBeforeUpdate);
         Mark testMark = markList.get(markList.size() - 1);
         assertThat(testMark.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testMark.getNth()).isEqualTo(UPDATED_NTH);
     }
 
     @Test

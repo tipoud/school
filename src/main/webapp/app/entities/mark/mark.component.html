@@ -18,6 +18,7 @@
             <tr>
             <th><span>ID</span></th>
             <th><span>Value</span></th>
+            <th><span>Nth</span></th>
             <th><span>Evaluation</span></th>
             <th><span>Skills</span></th>
             <th><span>Student</span></th>
@@ -28,6 +29,7 @@
             <tr *ngFor="let mark of marks ;trackBy: trackId">
                 <td><a [routerLink]="['../mark', mark.id ]">{{mark.id}}</a></td>
                 <td>{{mark.value}}</td>
+                <td>{{mark.nth}}</td>
                 <td>
                     <div *ngIf="mark.evaluation">
                         <a [routerLink]="['../evaluation', mark.evaluation?.id ]" >{{mark.evaluation?.wording}}</a>

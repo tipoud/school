@@ -19,10 +19,25 @@
             <div [hidden]="!(editForm.controls.value?.dirty && editForm.controls.value?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.value?.errors?.required">
-                   Ce champ est obligatoire.
+                   This field is required.
                 </small>
                 <small class="form-text text-danger"
                     [hidden]="!editForm.controls.value?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nth">Nth</label>
+            <input type="number" class="form-control" name="nth" id="field_nth"
+                [(ngModel)]="mark.nth" required />
+            <div [hidden]="!(editForm.controls.nth?.dirty && editForm.controls.nth?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nth?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.nth?.errors?.number">
                     This field should be a number.
                 </small>
             </div>
@@ -38,7 +53,7 @@
         <div [hidden]="!(editForm.controls.evaluation?.dirty && editForm.controls.evaluation?.invalid)">
             <small class="form-text text-danger"
                 [hidden]="!editForm.controls.evaluation?.errors?.required">
-                Ce champ est obligatoire.
+                This field is required.
             </small>
         </div>
         <div class="form-group">
@@ -51,7 +66,7 @@
         <div [hidden]="!(editForm.controls.skills?.dirty && editForm.controls.skills?.invalid)">
             <small class="form-text text-danger"
                 [hidden]="!editForm.controls.skills?.errors?.required">
-                Ce champ est obligatoire.
+                This field is required.
             </small>
         </div>
         <div class="form-group">
@@ -64,7 +79,7 @@
         <div [hidden]="!(editForm.controls.student?.dirty && editForm.controls.student?.invalid)">
             <small class="form-text text-danger"
                 [hidden]="!editForm.controls.student?.errors?.required">
-                Ce champ est obligatoire.
+                This field is required.
             </small>
         </div>
     </div>
