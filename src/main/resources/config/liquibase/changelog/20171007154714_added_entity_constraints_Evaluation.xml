@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Evaluation.
+    -->
+    <changeSet id="20171007154714-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="evaluation"
+                                 constraintName="fk_evaluation_file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluation_attachment"/>
+
+        <addForeignKeyConstraint baseColumnNames="classe_id"
+                                 baseTableName="evaluation"
+                                 constraintName="fk_evaluation_classe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="classe"/>
+
+        <addForeignKeyConstraint baseColumnNames="teacher_id"
+                                 baseTableName="evaluation"
+                                 constraintName="fk_evaluation_teacher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="teacher"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "evaluation",
+            "otherEntityName": "evaluation",
+            "otherEntityField": "wording"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "skills",
+            "otherEntityName": "skill",
+            "otherEntityField": "wording"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "otherEntityField": "lastName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171007154713",
+    "entityTableName": "mark",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass"
+}

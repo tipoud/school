@@ -1,0 +1,37 @@
+
+<div *ngIf="evaluationAttachment">
+    <h2><span>Evaluation Attachment</span> {{evaluationAttachment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Wording</span></dt>
+        <dd>
+            <span>{{evaluationAttachment.wording}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{evaluationAttachment.type}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{evaluationAttachment.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Path</span></dt>
+        <dd>
+            <span>{{evaluationAttachment.path}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'evaluation-attachment/'+ evaluationAttachment.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

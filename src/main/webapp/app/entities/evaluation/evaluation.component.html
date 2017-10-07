@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span>Evaluations</span>
+        <button class="btn btn-primary float-right jh-create-entity create-evaluation" [routerLink]="['/', { outlets: { popup: ['evaluation-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Evaluation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="evaluations">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="wording"><span>Wording</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="date"><span>Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="comment"><span>Comment</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="file.wording"><span>File</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="classe.wording"><span>Classe</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="teacher.lastName"><span>Teacher</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let evaluation of evaluations ;trackBy: trackId">
+                <td><a [routerLink]="['../evaluation', evaluation.id ]">{{evaluation.id}}</a></td>
+                <td>{{evaluation.wording}}</td>
+                <td>{{evaluation.date | date:'mediumDate'}}</td>
+                <td>{{evaluation.comment}}</td>
+                <td>{{evaluation.status}}</td>
+                <td>
+                    <div *ngIf="evaluation.file">
+                        <a [routerLink]="['../evaluation-attachment', evaluation.file?.id ]" >{{evaluation.file?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.classe">
+                        <a [routerLink]="['../classe', evaluation.classe?.id ]" >{{evaluation.classe?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.teacher">
+                        <a [routerLink]="['../teacher', evaluation.teacher?.id ]" >{{evaluation.teacher?.lastName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../evaluation', evaluation.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evaluation/'+ evaluation.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evaluation/'+ evaluation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

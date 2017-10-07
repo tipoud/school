@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span>Marks</span>
+        <button class="btn btn-primary float-right jh-create-entity create-mark" [routerLink]="['/', { outlets: { popup: ['mark-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Mark
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="marks">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Value</span></th>
+            <th><span>Evaluation</span></th>
+            <th><span>Skills</span></th>
+            <th><span>Student</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let mark of marks ;trackBy: trackId">
+                <td><a [routerLink]="['../mark', mark.id ]">{{mark.id}}</a></td>
+                <td>{{mark.value}}</td>
+                <td>
+                    <div *ngIf="mark.evaluation">
+                        <a [routerLink]="['../evaluation', mark.evaluation?.id ]" >{{mark.evaluation?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="mark.skills">
+                        <a [routerLink]="['../skill', mark.skills?.id ]" >{{mark.skills?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="mark.student">
+                        <a [routerLink]="['../student', mark.student?.id ]" >{{mark.student?.lastName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../mark', mark.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'mark/'+ mark.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'mark/'+ mark.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

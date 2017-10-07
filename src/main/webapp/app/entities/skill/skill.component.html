@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Skills</span>
+        <button class="btn btn-primary float-right jh-create-entity create-skill" [routerLink]="['/', { outlets: { popup: ['skill-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Skill
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="skills">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="wording"><span>Wording</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="level1"><span>Level 1</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="level2"><span>Level 2</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="level3"><span>Level 3</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="level4"><span>Level 4</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="active"><span>Active</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="area.wording"><span>Area</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let skill of skills ;trackBy: trackId">
+                <td><a [routerLink]="['../skill', skill.id ]">{{skill.id}}</a></td>
+                <td>{{skill.wording}}</td>
+                <td>{{skill.level1}}</td>
+                <td>{{skill.level2}}</td>
+                <td>{{skill.level3}}</td>
+                <td>{{skill.level4}}</td>
+                <td>{{skill.active}}</td>
+                <td>
+                    <div *ngIf="skill.area">
+                        <a [routerLink]="['../area', skill.area?.id ]" >{{skill.area?.wording}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../skill', skill.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'skill/'+ skill.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'skill/'+ skill.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

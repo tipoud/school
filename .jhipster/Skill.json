@@ -1,0 +1,56 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "area",
+            "otherEntityName": "area",
+            "otherEntityField": "wording"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "subject",
+            "otherEntityName": "subject",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "skills"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "wording",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "level1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "level2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "level3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "level4",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171007154712",
+    "entityTableName": "skill",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass"
+}

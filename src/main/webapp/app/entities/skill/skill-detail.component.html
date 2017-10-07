@@ -1,0 +1,51 @@
+
+<div *ngIf="skill">
+    <h2><span>Skill</span> {{skill.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Wording</span></dt>
+        <dd>
+            <span>{{skill.wording}}</span>
+        </dd>
+        <dt><span>Level 1</span></dt>
+        <dd>
+            <span>{{skill.level1}}</span>
+        </dd>
+        <dt><span>Level 2</span></dt>
+        <dd>
+            <span>{{skill.level2}}</span>
+        </dd>
+        <dt><span>Level 3</span></dt>
+        <dd>
+            <span>{{skill.level3}}</span>
+        </dd>
+        <dt><span>Level 4</span></dt>
+        <dd>
+            <span>{{skill.level4}}</span>
+        </dd>
+        <dt><span>Active</span></dt>
+        <dd>
+            <span>{{skill.active}}</span>
+        </dd>
+        <dt><span>Area</span></dt>
+        <dd>
+            <div *ngIf="skill.area">
+                <a [routerLink]="['/area', skill.area?.id]">{{skill.area?.wording}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'skill/'+ skill.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

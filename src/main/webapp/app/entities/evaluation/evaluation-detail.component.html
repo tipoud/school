@@ -1,0 +1,55 @@
+
+<div *ngIf="evaluation">
+    <h2><span>Evaluation</span> {{evaluation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Wording</span></dt>
+        <dd>
+            <span>{{evaluation.wording}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{evaluation.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Comment</span></dt>
+        <dd>
+            <span>{{evaluation.comment}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{evaluation.status}}</span>
+        </dd>
+        <dt><span>File</span></dt>
+        <dd>
+            <div *ngIf="evaluation.file">
+                <a [routerLink]="['/evaluation-attachment', evaluation.file?.id]">{{evaluation.file?.wording}}</a>
+            </div>
+        </dd>
+        <dt><span>Classe</span></dt>
+        <dd>
+            <div *ngIf="evaluation.classe">
+                <a [routerLink]="['/classe', evaluation.classe?.id]">{{evaluation.classe?.wording}}</a>
+            </div>
+        </dd>
+        <dt><span>Teacher</span></dt>
+        <dd>
+            <div *ngIf="evaluation.teacher">
+                <a [routerLink]="['/teacher', evaluation.teacher?.id]">{{evaluation.teacher?.lastName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'evaluation/'+ evaluation.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

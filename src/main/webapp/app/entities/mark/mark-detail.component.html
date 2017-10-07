@@ -1,0 +1,43 @@
+
+<div *ngIf="mark">
+    <h2><span>Mark</span> {{mark.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Value</span></dt>
+        <dd>
+            <span>{{mark.value}}</span>
+        </dd>
+        <dt><span>Evaluation</span></dt>
+        <dd>
+            <div *ngIf="mark.evaluation">
+                <a [routerLink]="['/evaluation', mark.evaluation?.id]">{{mark.evaluation?.wording}}</a>
+            </div>
+        </dd>
+        <dt><span>Skills</span></dt>
+        <dd>
+            <div *ngIf="mark.skills">
+                <a [routerLink]="['/skill', mark.skills?.id]">{{mark.skills?.wording}}</a>
+            </div>
+        </dd>
+        <dt><span>Student</span></dt>
+        <dd>
+            <div *ngIf="mark.student">
+                <a [routerLink]="['/student', mark.student?.id]">{{mark.student?.lastName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'mark/'+ mark.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
