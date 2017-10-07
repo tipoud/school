@@ -1,21 +1,37 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { GogradeSharedModule } from '../shared';
+import {GogradeSharedModule} from '../shared';
 
-import { OBSERVATION_ROUTE, ObservationComponent } from './';
+import {ObservationComponent, observationRoute} from './';
+import {ObservationDialogComponent, ObservationPopupComponent} from "./observation-dialog.component";
+import {EvaluationService} from "../entities/evaluation/evaluation.service";
+import {ObservationPopupService} from "./observation-popup-service";
+import {observationPopupRoute} from "./observation.route";
+
+const ENTITY_STATES = [
+    ...observationRoute,
+    ...observationPopupRoute,
+];
 
 @NgModule({
     imports: [
         GogradeSharedModule,
-        RouterModule.forRoot([ OBSERVATION_ROUTE ], { useHash: true })
+        RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
         ObservationComponent,
+        ObservationDialogComponent,
+        ObservationPopupComponent
     ],
     entryComponents: [
+        ObservationComponent,
+        ObservationDialogComponent,
+        ObservationPopupComponent
     ],
     providers: [
+        EvaluationService,
+        ObservationPopupService,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
