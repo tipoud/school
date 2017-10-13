@@ -5,16 +5,18 @@ import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-import {Evaluation} from "../entities/evaluation/evaluation.model";
-import {EvaluationAttachment} from "../entities/evaluation-attachment/evaluation-attachment.model";
-import {Classe} from "../entities/classe/classe.model";
-import {Teacher} from "../entities/teacher/teacher.model";
-import {EvaluationService} from "../entities/evaluation/evaluation.service";
-import {EvaluationAttachmentService} from "../entities/evaluation-attachment/evaluation-attachment.service";
-import {ClasseService} from "../entities/classe/classe.service";
-import {TeacherService} from "../entities/teacher/teacher.service";
-import {ResponseWrapper} from "../shared/model/response-wrapper.model";
-import {ObservationPopupService} from "./observation-popup-service";
+import {Evaluation} from '../entities/evaluation/evaluation.model';
+import {EvaluationAttachment} from '../entities/evaluation-attachment/evaluation-attachment.model';
+import {Classe} from '../entities/classe/classe.model';
+import {Teacher} from '../entities/teacher/teacher.model';
+import {Subject} from '../entities/subject/subject.model';
+import {EvaluationService} from '../entities/evaluation/evaluation.service';
+import {EvaluationAttachmentService} from '../entities/evaluation-attachment/evaluation-attachment.service';
+import {ClasseService} from '../entities/classe/classe.service';
+import {TeacherService} from '../entities/teacher/teacher.service';
+import {SubjectService} from '../entities/subject/subject.service';
+import {ResponseWrapper} from '../shared/model/response-wrapper.model';
+import {EvaluationPopupService} from '../entities/evaluation/evaluation-popup.service';
 
 @Component({
     selector: 'jhi-observation-dialog',
@@ -29,7 +31,7 @@ export class ObservationDialogComponent implements OnInit {
 
     classes: Classe[];
 
-    teachers: Teacher[];
+    subjects: Subject[];
     dateDp: any;
 
     constructor(
@@ -39,6 +41,7 @@ export class ObservationDialogComponent implements OnInit {
         private evaluationAttachmentService: EvaluationAttachmentService,
         private classeService: ClasseService,
         private teacherService: TeacherService,
+        private subjectService: SubjectService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -60,8 +63,11 @@ export class ObservationDialogComponent implements OnInit {
             }, (res: ResponseWrapper) => this.onError(res.json));
         this.classeService.query()
             .subscribe((res: ResponseWrapper) => { this.classes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.teacherService.query()
-            .subscribe((res: ResponseWrapper) => { this.teachers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.teacherService.findCurrent()
+            .subscribe((teacher) => { this.evaluation.teacher = teacher; }, () => this.activeModal.dismiss('no teacher found'));
+        this.subjectService.query()
+            .subscribe((res: ResponseWrapper) => { this.subjects = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.evaluation.status = 0
     }
 
     clear() {
@@ -85,7 +91,7 @@ export class ObservationDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Evaluation) {
-        this.eventManager.broadcast({ name: 'evaluationListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'observationListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -106,7 +112,7 @@ export class ObservationDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackTeacherById(index: number, item: Teacher) {
+    trackSubjectById(index: number, item: Subject) {
         return item.id;
     }
 }
@@ -121,7 +127,7 @@ export class ObservationPopupComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private observationPopupService: ObservationPopupService
+        private observationPopupService: EvaluationPopupService
     ) {}
 
     ngOnInit() {

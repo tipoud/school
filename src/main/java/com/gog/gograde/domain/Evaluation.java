@@ -47,6 +47,10 @@ public class Evaluation implements Serializable {
     @NotNull
     private Teacher teacher;
 
+    @ManyToOne(optional = false)
+    @NotNull
+    private Subject subject;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -145,6 +149,19 @@ public class Evaluation implements Serializable {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public Evaluation subject(Subject subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

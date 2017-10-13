@@ -33,6 +33,12 @@ export class TeacherService {
         });
     }
 
+    findCurrent(): Observable<Teacher> {
+        return this.http.get(`${this.resourceUrl}/current`).map((res: Response) => {
+            return res.json();
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

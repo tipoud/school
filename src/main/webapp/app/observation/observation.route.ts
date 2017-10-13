@@ -2,7 +2,7 @@
 import {UserRouteAccessService} from '../shared';
 import {ObservationComponent} from './';
 import {ObservationPopupComponent} from './observation-dialog.component';
-import {Route, Routes} from "@angular/router";
+import {Route, Routes} from '@angular/router';
 
 export const observationRoute: Routes = [
     {

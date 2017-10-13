@@ -112,6 +112,19 @@ public class TeacherResource {
     }
 
     /**
+     * GET  /teacher : get the teacher associated to the current user.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the teacher, or with status 404 (Not Found)
+     */
+    @GetMapping("/teachers/current")
+    @Timed
+    public ResponseEntity<Teacher> getCurrentTeacher() {
+        log.debug("REST request to get Teacher associated to the current user");
+        Teacher teacher = teacherService.findCurrent();
+        return new ResponseEntity<>(teacher,null,HttpStatus.OK);
+    }
+
+    /**
      * DELETE  /teachers/:id : delete the "id" teacher.
      *
      * @param id the id of the teacher to delete

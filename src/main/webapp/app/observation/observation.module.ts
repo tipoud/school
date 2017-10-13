@@ -4,10 +4,12 @@ import {RouterModule} from '@angular/router';
 import {GogradeSharedModule} from '../shared';
 
 import {ObservationComponent, observationRoute} from './';
-import {ObservationDialogComponent, ObservationPopupComponent} from "./observation-dialog.component";
-import {EvaluationService} from "../entities/evaluation/evaluation.service";
-import {ObservationPopupService} from "./observation-popup-service";
-import {observationPopupRoute} from "./observation.route";
+import {ObservationDialogComponent, ObservationPopupComponent} from './observation-dialog.component';
+import {EvaluationService} from '../entities/evaluation/evaluation.service';
+import {ObservationPopupService} from './observation-popup-service';
+import {observationPopupRoute} from './observation.route';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
 
 const ENTITY_STATES = [
     ...observationRoute,
@@ -17,12 +19,14 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         GogradeSharedModule,
-        RouterModule.forRoot(ENTITY_STATES, { useHash: true })
+        RouterModule.forRoot(ENTITY_STATES, { useHash: true }),
+        NgbModule,
+        MultiselectDropdownModule,
     ],
     declarations: [
         ObservationComponent,
         ObservationDialogComponent,
-        ObservationPopupComponent
+        ObservationPopupComponent,
     ],
     entryComponents: [
         ObservationComponent,

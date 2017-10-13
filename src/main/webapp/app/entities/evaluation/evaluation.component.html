@@ -24,6 +24,7 @@
             <th jhiSortBy="file.wording"><span>File</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="classe.wording"><span>Classe</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="teacher.lastName"><span>Teacher</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="subject.wording"><span>Subject</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -47,6 +48,11 @@
                 <td>
                     <div *ngIf="evaluation.teacher">
                         <a [routerLink]="['../teacher', evaluation.teacher?.id ]" >{{evaluation.teacher?.lastName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.subject">
+                        <a [routerLink]="['../subject', evaluation.subject?.id ]" >{{evaluation.subject?.wording}}</a>
                     </div>
                 </td>
                 <td class="text-right">

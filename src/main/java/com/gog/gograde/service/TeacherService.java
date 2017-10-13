@@ -2,6 +2,7 @@ package com.gog.gograde.service;
 
 import com.gog.gograde.domain.Teacher;
 import com.gog.gograde.repository.TeacherRepository;
+import com.gog.gograde.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -68,5 +69,16 @@ public class TeacherService {
     public void delete(Long id) {
         log.debug("Request to delete Teacher : {}", id);
         teacherRepository.delete(id);
+    }
+
+    /**
+     *  Get one teacher associated to the current user.
+     *
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Teacher findCurrent() {
+        log.debug("Request to get the current Teacher");
+        return teacherRepository.findTeacherByUserLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
     }
 }

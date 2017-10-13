@@ -38,6 +38,12 @@
                 <a [routerLink]="['/teacher', evaluation.teacher?.id]">{{evaluation.teacher?.lastName}}</a>
             </div>
         </dd>
+        <dt><span>Subject</span></dt>
+        <dd>
+            <div *ngIf="evaluation.subject">
+                <a [routerLink]="['/subject', evaluation.subject?.id]">{{evaluation.subject?.wording}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

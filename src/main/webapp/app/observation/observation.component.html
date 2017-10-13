@@ -1,9 +1,89 @@
 <div>
     <h2>
-        <span>Observation</span>
-        <button class="btn btn-primary float-right jh-create-entity"
+        <span>Observations</span>
+        <button class="btn btn-primary float-right jh-create-entity" [disabled]="teacher == null"
                 [routerLink]="['/', { outlets: { popup: ['observation-new'] } }]">
             <span class="fa fa-plus"></span> <span>Créer un nouvelle observation</span>
         </button>
     </h2>
+    <p>
+    <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" [texts]="myTexts" [settings]="mySettings"></ss-multiselect-dropdown>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="optionsModel">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="wording"><span>Libellé</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="date"><span>Date</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="status"><span>Statut</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="file.wording"><span>Fichier</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="classe.wording"><span>Classe</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="teacher.lastName"><span>Enseignant</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="subject.wording"><span>Matière</span> <span class="fa fa-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                   [infiniteScrollDistance]="0">
+            <tr *ngFor="let evaluation of optionsModel ;trackBy: trackId">
+                <td><a [routerLink]="['../evaluation', evaluation.id ]">{{evaluation.wording}}</a></td>
+                <td>{{evaluation.date | date:'mediumDate'}}</td>
+                <td>{{evaluation.status}}</td>
+                <td>
+                    <div *ngIf="evaluation.file">
+                        <a [routerLink]="['../evaluation-attachment', evaluation.file?.id ]">{{evaluation.file?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.classe">
+                        <a [routerLink]="['../classe', evaluation.classe?.id ]">{{evaluation.classe?.level}}<sup>ème</sup>
+                            {{evaluation.classe?.wording}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.teacher">
+                        <a [routerLink]="['../teacher', evaluation.teacher?.id ]">{{evaluation.teacher?.firstName}}
+                            {{evaluation.teacher?.lastName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evaluation.subject">
+                        <a [routerLink]="['../subject', evaluation.subject?.id ]">{{evaluation.subject?.wording}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../evaluation', evaluation.id ]"
+                                class="btn btn-primary btn-sm">
+                            <span class="d-none d-md-inline">Saisir</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['../evaluation', evaluation.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evaluation/'+ evaluation.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'evaluation/'+ evaluation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+    </div>
 </div>

@@ -5,6 +5,7 @@ import com.gog.gograde.GogradeApp;
 import com.gog.gograde.domain.Evaluation;
 import com.gog.gograde.domain.Classe;
 import com.gog.gograde.domain.Teacher;
+import com.gog.gograde.domain.Subject;
 import com.gog.gograde.repository.EvaluationRepository;
 import com.gog.gograde.service.EvaluationService;
 import com.gog.gograde.web.rest.errors.ExceptionTranslator;
@@ -108,6 +109,11 @@ public class EvaluationResourceIntTest {
         em.persist(teacher);
         em.flush();
         evaluation.setTeacher(teacher);
+        // Add required entity
+        Subject subject = SubjectResourceIntTest.createEntity(em);
+        em.persist(subject);
+        em.flush();
+        evaluation.setSubject(subject);
         return evaluation;
     }
 

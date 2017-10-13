@@ -10,6 +10,11 @@ export class Classe implements BaseEntity {
         public students?: BaseEntity[],
         public teachers?: BaseEntity[],
     ) {
-        this.active = false;
+        this.active = true;
+    }
+
+    fullName() : String {
+        let name = this.level + "ème " + this.wording
+        return name;
     }
 }

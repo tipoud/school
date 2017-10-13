@@ -12,6 +12,7 @@ import { EvaluationService } from './evaluation.service';
 import { EvaluationAttachment, EvaluationAttachmentService } from '../evaluation-attachment';
 import { Classe, ClasseService } from '../classe';
 import { Teacher, TeacherService } from '../teacher';
+import { Subject, SubjectService } from '../subject';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -28,6 +29,8 @@ export class EvaluationDialogComponent implements OnInit {
     classes: Classe[];
 
     teachers: Teacher[];
+
+    subjects: Subject[];
     dateDp: any;
 
     constructor(
@@ -37,6 +40,7 @@ export class EvaluationDialogComponent implements OnInit {
         private evaluationAttachmentService: EvaluationAttachmentService,
         private classeService: ClasseService,
         private teacherService: TeacherService,
+        private subjectService: SubjectService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -60,6 +64,8 @@ export class EvaluationDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.classes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.teacherService.query()
             .subscribe((res: ResponseWrapper) => { this.teachers = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.subjectService.query()
+            .subscribe((res: ResponseWrapper) => { this.subjects = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -105,6 +111,10 @@ export class EvaluationDialogComponent implements OnInit {
     }
 
     trackTeacherById(index: number, item: Teacher) {
+        return item.id;
+    }
+
+    trackSubjectById(index: number, item: Subject) {
         return item.id;
     }
 }
