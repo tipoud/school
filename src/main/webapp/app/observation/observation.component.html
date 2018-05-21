@@ -2,17 +2,20 @@
     <h2>
         <span>Observations</span>
         <button class="btn btn-primary float-right jh-create-entity" [disabled]="teacher == null"
-                [routerLink]="['/', { outlets: { popup: ['observation-new'] } }]">
-            <span class="fa fa-plus"></span> <span>Créer un nouvelle observation</span>
+                                 [routerLink]="['/', { outlets: { popup: ['observation-new'] } }]">
+        <span class="fa fa-plus"></span> <span>Créer un nouvelle observation</span>
+    </button>
+        <button class="btn btn-primary float-right jh-create-entity" [disabled]="teacher == null" (click)="addObs()">
+            <span class="fa fa-plus"></span> <span>ajouter une observation</span>
         </button>
     </h2>
-    <p>
     <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" [texts]="myTexts" [settings]="mySettings"></ss-multiselect-dropdown>
-    <jhi-alert></jhi-alert>
+    <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" [texts]="myTexts" [settings]="mySettings"></ss-multiselect-dropdown>
+        <jhi-alert></jhi-alert>
     <div class="row">
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="optionsModel">
+    <div class="table-responsive" *ngIf="evaluations">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">

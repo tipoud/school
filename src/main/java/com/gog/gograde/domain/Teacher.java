@@ -1,6 +1,8 @@
 package com.gog.gograde.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -29,6 +31,7 @@ public class Teacher implements Serializable {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @JsonIgnore
     @OneToOne(optional = false)
     @NotNull
     @JoinColumn(unique = true)

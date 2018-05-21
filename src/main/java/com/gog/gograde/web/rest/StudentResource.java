@@ -98,6 +98,20 @@ public class StudentResource {
     }
 
     /**
+     * GET  /classes/:id/students : get all the students for "id" classe.
+     *
+     * @param id the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of students in body
+     */
+    @GetMapping("classes/{id}/students")
+    @Timed
+    public List<Student> getAllStudents(@PathVariable Long id) {
+        log.debug("REST request to get a list of Students of the classe with id : " +id);
+        return studentService.findAllByClasseId(id);
+
+    }
+
+    /**
      * GET  /students/:id : get the "id" student.
      *
      * @param id the id of the student to retrieve

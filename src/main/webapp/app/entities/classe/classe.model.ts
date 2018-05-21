@@ -13,8 +13,7 @@ export class Classe implements BaseEntity {
         this.active = true;
     }
 
-    fullName() : String {
-        let name = this.level + "ème " + this.wording
-        return name;
+    fullName(): string {
+        return this.level + 'ème ' + this.wording;
     }
 }

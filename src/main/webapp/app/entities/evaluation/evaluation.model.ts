@@ -1,6 +1,7 @@
 import { BaseEntity } from './../../shared';
 import {Teacher} from '../teacher/teacher.model';
-import {Classe} from "../classe/classe.model";
+import {Classe} from '../classe/classe.model';
+import {Subject} from '../subject/subject.model';
 
 export class Evaluation implements BaseEntity {
     constructor(
@@ -12,7 +13,7 @@ export class Evaluation implements BaseEntity {
         public file?: BaseEntity,
         public classe?: Classe,
         public teacher?: Teacher,
-        public subject?: BaseEntity,
+        public subject?: Subject,
     ) {
     }
 }

@@ -1,0 +1,67 @@
+<div>
+    <h2>
+        <span>Saisie des résultats</span>
+    </h2>
+    <p>
+        <ss-multiselect-dropdown [options]="studentsOptions" [(ngModel)]="selectedStudents" [texts]="myTexts"
+                                 [settings]="mySettings"
+                                 (ngModelChange)="orderByStudentName()"></ss-multiselect-dropdown>
+        <button class="btn btn-primary float-right jh-create-entity" [disabled]="teacher == null" (click)="addStudent()">
+            <span class="fa fa-plus"></span> <span>ajouter une observation</span>
+        </button>
+        <jhi-alert></jhi-alert>
+    <div class="row">
+        <div>Ajouter un objectif
+            <div *ngFor="let area of areas">
+                <p>{{area.wording}}</p>
+                    <div *ngFor="let skill of area.skills">
+                        <div>
+                            {{skill.wording}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-9">
+            <div class="table-responsive" *ngIf="studentsOptions">
+                <table class="table table-striped">
+                    <thead>
+                    <th><span>Elèves</span></th>
+                    <th><span>Objectifs</span></th>
+                    <th></th>
+                    </tr>
+                    </thead>
+                    <tr *ngFor="let student of selectedStudents ;trackBy: trackId">
+                        <td><a [routerLink]="['../student', student.id ]">{{student.firstName}}</a></td>
+                        <td>objectif</td>
+                        <td>
+                            <button (click)="deleteStudent(student.id)"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                            </button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div class="col-3">
+
+
+            <ngb-accordion [closeOthers]="true" id="myaccordeon">
+                <ngb-panel *ngFor="let area of areas" title={{area.wording}} class="p-0 area-panel">
+                    <ng-template ngbPanelContent class="p-0 accordeon">
+                        <button class="btn btn-sm btn-primary skill-button" *ngFor="let skill of area.skills">
+                            {{skill.wording}}
+                        </button>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { BaseEntity } from './../../shared';
+import {Area} from '../area/area.model';
+import {Subject} from '../subject/subject.model';
 
 export class Skill implements BaseEntity {
     constructor(
@@ -9,8 +11,8 @@ export class Skill implements BaseEntity {
         public level3?: string,
         public level4?: string,
         public active?: boolean,
-        public area?: BaseEntity,
-        public subjects?: BaseEntity[],
+        public area?: Area,
+        public subjects?: Subject[],
     ) {
         this.active = false;
     }

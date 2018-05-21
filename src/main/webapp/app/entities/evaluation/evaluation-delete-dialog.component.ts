@@ -28,12 +28,15 @@ export class EvaluationDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
+        console.log("confimDelete")
         this.evaluationService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'evaluationListModification',
                 content: 'Deleted an evaluation'
             });
             this.activeModal.dismiss(true);
+            console.log("OK")
+
         });
     }
 }

@@ -10,10 +10,12 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class StudentService {
 
     private resourceUrl = SERVER_API_URL + 'api/students';
+    private resourceClasseUrl = SERVER_API_URL + 'api/classes';
 
     constructor(private http: Http) { }
 
     create(student: Student): Observable<Student> {
+        console.log(JSON.stringify(student));
         const copy = this.convert(student);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
@@ -41,6 +43,11 @@ export class StudentService {
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    findAllByClasseId(id: number): Observable<ResponseWrapper> {
+        const url = `${this.resourceClasseUrl}/${id}/students`;
+        return this.http.get(url).map((res: Response) => this.convertResponse(res));
     }
 
     private convertResponse(res: Response): ResponseWrapper {

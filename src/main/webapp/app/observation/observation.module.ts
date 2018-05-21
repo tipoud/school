@@ -9,7 +9,7 @@ import {EvaluationService} from '../entities/evaluation/evaluation.service';
 import {ObservationPopupService} from './observation-popup-service';
 import {observationPopupRoute} from './observation.route';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
+import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 
 const ENTITY_STATES = [
     ...observationRoute,

@@ -54,6 +54,7 @@ export class EvaluationComponent implements OnInit, OnDestroy {
     }
 
     reset() {
+        console.log("reset in evaluation.comp.ts")
         this.page = 0;
         this.evaluations = [];
         this.loadAll();

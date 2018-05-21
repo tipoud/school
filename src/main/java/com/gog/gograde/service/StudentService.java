@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * Service Implementation for managing Student.
@@ -46,6 +48,18 @@ public class StudentService {
     public Page<Student> findAll(Pageable pageable) {
         log.debug("Request to get all Students");
         return studentRepository.findAll(pageable);
+    }
+
+    /**
+     *  Get all the students for one classe.
+     *
+     *  @param id the pagination information
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<Student> findAllByClasseId(Long id) {
+        log.debug("Request to get all Students for the classe with id : " + id);
+        return studentRepository.findAllByClasseId(id);
     }
 
     /**

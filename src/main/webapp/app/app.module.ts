@@ -13,7 +13,7 @@ import { GogradeEntityModule } from './entities/entity.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -26,8 +26,8 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
-import { ObservationComponent } from './observation/observation.component';
-import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
+import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
+import {GogradeMarksModule} from './observation/marks/marks.module';
 
 @NgModule({
     imports: [
@@ -40,6 +40,7 @@ import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
         GogradeAccountModule,
         GogradeEntityModule,
         GogradeObservationModule,
+        GogradeMarksModule,
         NgbModule.forRoot(),
         MultiselectDropdownModule,
 

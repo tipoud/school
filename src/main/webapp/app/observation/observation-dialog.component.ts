@@ -91,7 +91,7 @@ export class ObservationDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: Evaluation) {
-        this.eventManager.broadcast({ name: 'observationListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'evaluationListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }

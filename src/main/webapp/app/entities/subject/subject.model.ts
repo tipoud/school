@@ -1,4 +1,6 @@
 import { BaseEntity } from './../../shared';
+import {Skill} from '../skill/skill.model';
+import {Teacher} from '../teacher/teacher.model';
 
 export class Subject implements BaseEntity {
     constructor(
@@ -6,8 +8,8 @@ export class Subject implements BaseEntity {
         public wording?: string,
         public abreviation?: string,
         public active?: boolean,
-        public skills?: BaseEntity[],
-        public teachers?: BaseEntity[],
+        public skills?: Skill[],
+        public teachers?: Teacher[],
     ) {
         this.active = false;
     }
